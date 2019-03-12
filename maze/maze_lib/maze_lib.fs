@@ -10,8 +10,7 @@ type Cell(row:int, col:int) =
     member val west: Cell option = None with get,set
     
     
-    
-    
-
-type Class1() = 
-    member this.X = "F#"
+type Grid(row:int, col:int) =
+    let row:int = row
+    let col:int = col
+    member val grid: Cell array array = [||]

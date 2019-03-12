@@ -4,11 +4,23 @@
 type Cell(row:int, col:int) =
     member val row:int = row with get
     member val col:int = col with get
-    member val link:Cell List = []
+    member val path:Cell List = [] with get, set
     member val north: Cell option = None with get,set
     member val south: Cell option = None with get,set
     member val east: Cell option = None with get,set
     member val west: Cell option = None with get,set
+
+    member x.link(c:Cell option) = match c with
+                                   | None -> ()
+                                   | Some(cc) -> x.path <- cc :: x.path
+                                   
+
+    member x.bilink(c:Cell option) = match c with
+                                     | None -> ()
+                                     | Some(cc) -> x.link(c)
+                                                   cc.link(Some(x))
+                                  
+
     member x.ref_to_str_n() = match x.north with 
                                 | None -> ""
                                 | Some(c) -> sprintf "N:(%d, %d)" c.row c.col
@@ -25,13 +37,13 @@ type Cell(row:int, col:int) =
                                 | None -> ""
                                 | Some(c) -> sprintf "W:(%d, %d)" c.row c.col
 
+    member x.ref_to_str(c:Cell) = sprintf "(%d %d) " c.row c.col
+
+    member x.path_to_str() = List.map x.ref_to_str x.path
+                             |> String.concat " "
 
 
-    override  x.ToString() = sprintf "Cell(%d, %d) " x.row x.col 
-                             + x.ref_to_str_n()
-                             + x.ref_to_str_s()
-                             + x.ref_to_str_e()
-                             + x.ref_to_str_w()
+    override  x.ToString() = sprintf "Cell(%d, %d) Link " x.row x.col + x.path_to_str() 
                              
     
 type Grid(row:int, col:int) =

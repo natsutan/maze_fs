@@ -1,4 +1,5 @@
 ﻿namespace maze_lib
+//open Array2D
 
 type Cell(row:int, col:int) =
     let row:int = row
@@ -13,4 +14,6 @@ type Cell(row:int, col:int) =
 type Grid(row:int, col:int) =
     let row:int = row
     let col:int = col
-    member val grid: Cell array array = [||]
+    member val grid = Array2D.init row col (fun i j -> Cell(i, j))
+
+    

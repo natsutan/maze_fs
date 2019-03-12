@@ -19,7 +19,15 @@ type Cell(row:int, col:int) =
                                      | None -> ()
                                      | Some(cc) -> x.link(c)
                                                    cc.link(Some(x))
-                                  
+    member x.path_find(c:Cell, l:Cell List) : bool = match l with
+                                                     | [] -> false
+                                                     | x::xs -> if x.row = c.row && x.col = c.col then true
+                                                                else x.path_find(c, xs) 
+
+
+    member x.is_linked(c:Cell option) = match c with 
+                                        | None -> false
+                                        | Some(cc) -> x.path_find(cc, x.path)
 
     member x.ref_to_str_n() = match x.north with 
                                 | None -> ""
@@ -54,12 +62,31 @@ type Grid(row:int, col:int) =
 
     member x.init() = for i=0 to row - 1 do 
                         for j=0 to col - 1 do
-                            printfn "i,j = %d,%d row = %d col = %d" i j row col
                             let c = x.grid.[i,j]
                             if i < (row - 1) then c.north <- Some(x.grid.[i+1,j])
                             if i > 0 then c.south <- Some(x.grid.[i-1,j])
-                          
                             if j < (col - 1) then c.east <- Some(x.grid.[i,j+1])
                             if j > 0 then c.west <- Some(x.grid.[i,j-1])
 
                             
+    override  x.ToString() = let mutable output = "\n+"
+                             for i=0 to col - 1 do
+                                output <- output + "---+"
+                             output <- output + "\n"
+
+                             for i in row - 1 .. -1 .. 0 do
+                                let mutable top = "|"
+                                let mutable bottom = "+"
+                                for j=0 to col - 1 do
+                                    let cell = x.grid.[i,j]
+                                    let body = "   "
+                                    let corner = "+"
+                                    let east_bound = if cell.is_linked(cell.east) then " " else "|"                                    
+                                    let south_bound = if cell.is_linked(cell.south) then "   " else "---"
+                                    top <- top + body + east_bound
+                                    bottom <- bottom + south_bound + corner
+
+                                output <- output + top + "\n"
+                                output <- output + bottom + "\n"
+
+                             output

@@ -24,9 +24,8 @@ let main argv =
     let g = maze_lib.Grid(4, 4)
     g.init()
 
-    
     btree g
-    printfn "btree %O" g.grid.[0, 1]
+    printfn "btree %O" g
 
 
     0 // 整数の終了コードを返します

@@ -3,6 +3,9 @@
 open maze_lib
 
 [<EntryPoint>]
-let main argv = 
-    printfn "btree %A" argv
+let main argv =
+    let a = maze_lib.Cell(0, 1)
+        
+    
+    printfn "btree %A" a.east
     0 // 整数の終了コードを返します

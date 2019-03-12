@@ -4,8 +4,12 @@ open maze_lib
 
 [<EntryPoint>]
 let main argv =
-    let a = maze_lib.Cell(0, 1)
     let g = maze_lib.Grid(2, 2)
+    g.init()
+
+    printfn "btree %O" g.grid.[0, 1]
     
-    printfn "btree %A" g.grid.[0, 1]
+    printfn "btree %O" g.grid.[1, 1]
+
+
     0 // 整数の終了コードを返します

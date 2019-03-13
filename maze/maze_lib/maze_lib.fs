@@ -93,9 +93,44 @@ type Grid(row:int, col:int) =
 
                              output
     module Conv = 
-        let to_png(g:Grid, filename:string, cellsize:int) = ()
-
-        let to_png_def g = to_png(g, "maze.png", 10)
+        let to_png(g:Grid, filename:string, cellsize:int) =
+            let row, col = g.shape()
+            let width = col * cellsize
+            let height = row * cellsize
+            let pen = Pens.Black
+            let bmp = new Bitmap(width+10, height+10)
+            let gra = Graphics.FromImage(bmp)
+            
+            for i=0 to row - 1 do 
+                for j=0 to col - 1 do
+                    let c = g.grid.[i,j]
+                    
+                    let x1 = c.col * cellsize
+                    let y1 = height - c.row * cellsize
+                    let x2 = (c.col + 1) * cellsize
+                    let y2 = height - (c.row + 1) * cellsize                   
+                    
+                    match c.north with
+                    | None -> gra.DrawLine(pen, x1, y2, x2, y2)
+                    | Some(cc) -> ()
+                    match c.west with
+                    | None -> gra.DrawLine(pen, x1, y2, x1, y1)
+                    | Some(cc) -> ()
+                                      
+                    if not (c.is_linked c.east) then
+                        gra.DrawLine(pen, x2, y2, x2, y1)
+                    
+                    if not (c.is_linked c.south) then
+                        gra.DrawLine(pen, x1, y1, x2, y1)
+                  
+            
+            bmp.Save(filename)
+            bmp.Dispose()
+            ()
+                             
+            
+        
+        let to_png_def g = to_png(g, "maze.png", 50)
        
 
 //let bmp = new Bitmap(@"filename")

@@ -1,4 +1,6 @@
 ﻿namespace maze_lib
+open System
+open System.Drawing
 //open Array2D
 
 type Cell(row:int, col:int) =
@@ -90,3 +92,12 @@ type Grid(row:int, col:int) =
                                 output <- output + bottom + "\n"
 
                              output
+    module Conv = 
+        let to_png(g:Grid, filename:string, cellsize:int) = ()
+
+        let to_png_def g = to_png(g, "maze.png", 10)
+       
+
+//let bmp = new Bitmap(@"filename")
+
+                            

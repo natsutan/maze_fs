@@ -9,6 +9,8 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "maze_lib", "maze_lib\maze_l
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "btree", "btree\btree.fsproj", "{541F34EB-6F0B-4D56-95AD-56A4E2E77CAC}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "sidewinder", "sidewinder\sidewinder.fsproj", "{BD9E5FF4-CB32-453C-813F-0A7862359551}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{541F34EB-6F0B-4D56-95AD-56A4E2E77CAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{541F34EB-6F0B-4D56-95AD-56A4E2E77CAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{541F34EB-6F0B-4D56-95AD-56A4E2E77CAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD9E5FF4-CB32-453C-813F-0A7862359551}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD9E5FF4-CB32-453C-813F-0A7862359551}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD9E5FF4-CB32-453C-813F-0A7862359551}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD9E5FF4-CB32-453C-813F-0A7862359551}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
